@@ -1,39 +1,48 @@
 import React, { useState } from 'react';
 import { Button } from '../button/Button';
+import s from './Counter.module.css'
 
-export const Counter = () => {
-    let [count, setCount] = useState(0)
+type CounterPropsType = {
+    count: number
+    incrementCounter: () => void
+    resetCounter: () => void
+}
 
-    const onIncrementClickHandler = () => {
-        setCount(count + 1)
+export const Counter = ({count, incrementCounter, resetCounter}: CounterPropsType) => {
+    
+    const incrementCounterHandler = () => {
+        incrementCounter()
     }
 
-    const onResetClickHandler = () => {
-        setCount(0)
+    const resetCounterhandler = () => {
+        resetCounter()
     }
-
-    const isIncrementBtnDisabled = count === 5;
-    const isResetBtnDisabled = count === 0
+    
+    const maxValue = count === 5;
+    const minValue = count === 0;
+    const isIncrementBtnDisabled = maxValue
+    const isResetBtnDisabled = minValue
     
     return (
-        <div className={'counter'}>
-            <div className={count === 5 ? 'count-warning' : 'scoreboard'}>
-                {count}
+        <div className={s.counter}>
+            <div className={s.scoreboard}>
+                <div className={maxValue ? s.countWarning : ''}>
+                    {count}
+                </div>
             </div>
             
-            <div className={'button-section'}>
-                <Button className={'inc-button'}
-                    title={count === 0 ? 'Press on me, please!' : 'Oh yeah, master, more!'}
-                    onClick={onIncrementClickHandler}
+            <div className={s.buttonSection}>
+                <Button className={`${s.button} ${s.incButton}`} 
+                    title={minValue ? 'Press on me, please!' : 'Oh yeah, master, more!'}
+                    onClick={incrementCounterHandler}
                     disabled={isIncrementBtnDisabled}
                 />
-                <Button className={'reset-button'}
+                <Button className={`${s.button} ${s.resetButton}`} 
                     title={'Reset'}
-                    onClick={onResetClickHandler}
+                    onClick={resetCounterhandler}
                     disabled={isResetBtnDisabled}
                 />
             </div>
-            {count === 5 ? <div className={'warning'}>Hey, master! 5 max value!!!</div> : ''}
         </div>
     );
 };
