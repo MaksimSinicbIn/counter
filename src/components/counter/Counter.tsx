@@ -32,12 +32,13 @@ export const Counter = ({count, incrementCounter, resetCounter}: CounterPropsTyp
             </div>
             
             <div className={s.buttonSection}>
-                <Button className={`${s.button} ${s.incButton}`} 
+                <Button
+                    bgColor='#3ae0a9'
                     title={minValue ? 'Press on me, please!' : 'Oh yeah, master, more!'}
                     onClick={incrementCounterHandler}
                     disabled={isIncrementBtnDisabled}
                 />
-                <Button className={`${s.button} ${s.resetButton}`} 
+                <Button
                     title={'Reset'}
                     onClick={resetCounterHandler}
                     disabled={isResetBtnDisabled}

@@ -1,0 +1,20 @@
+.button {
+    width: 140px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 1px 3px 3px rgb(31, 31, 31);
+}
+
+.incButton {
+    background-color: #3ae0a9;
+}
+
+.resetButton {
+    background-color: red;
+}
+
+.default {
+    background: #b0beb8;
+}
