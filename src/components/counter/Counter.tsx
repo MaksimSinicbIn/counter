@@ -14,7 +14,7 @@ export const Counter = ({count, incrementCounter, resetCounter}: CounterPropsTyp
         incrementCounter()
     }
 
-    const resetCounterhandler = () => {
+    const resetCounterHandler = () => {
         resetCounter()
     }
     
@@ -39,7 +39,7 @@ export const Counter = ({count, incrementCounter, resetCounter}: CounterPropsTyp
                 />
                 <Button className={`${s.button} ${s.resetButton}`} 
                     title={'Reset'}
-                    onClick={resetCounterhandler}
+                    onClick={resetCounterHandler}
                     disabled={isResetBtnDisabled}
                 />
             </div>
