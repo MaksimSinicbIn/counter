@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Counter } from './components/counter/Counter';
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState<number>(0)
+
+    useEffect( () => {
+        let valueAsString = localStorage.getItem('countValue')
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            setCount(newValue)
+        }
+    }, [] )
+
+    useEffect( () => {
+        localStorage.setItem('countValue', JSON.stringify(count))
+    }, [count] )
 
     const incrementCounter = () => {
         setCount(count + 1)
