@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Button } from '../button/Button';
 import s from './Counter.module.css'
 
 type CounterPropsType = {
     count: number
+    startValue: number
+    maxValue: number
     incrementCounter: () => void
-    resetCounter: () => void
+    resetCounter: (startValue: number) => void
 }
 
-export const Counter = ({count, incrementCounter, resetCounter}: CounterPropsType) => {
-    
+export const Counter = ({count, startValue, maxValue, incrementCounter, resetCounter}: CounterPropsType) => {
+
     const incrementCounterHandler = () => {
+        if (count < maxValue)
         incrementCounter()
     }
 
     const resetCounterHandler = () => {
-        resetCounter()
+        if (startValue >= 0) {
+            resetCounter(startValue)
+        }
     }
-    
-    const maxValue = count === 5;
-    const minValue = count === 0;
-    const isIncrementBtnDisabled = maxValue
-    const isResetBtnDisabled = minValue
+
+    const incBtnDisabled = count === maxValue;
+    const resetBtnDisabled = count === startValue;
     
     return (
         <div className={s.counter}>
             <div className={s.scoreboard}>
-                <div className={maxValue ? s.countWarning : ''}>
+                <div className={count === maxValue ? s.countWarning : ''}>
                     {count}
                 </div>
             </div>
@@ -34,14 +37,14 @@ export const Counter = ({count, incrementCounter, resetCounter}: CounterPropsTyp
             <div className={s.buttonSection}>
                 <Button
                     bgColor='#3ae0a9'
-                    title={minValue ? 'Press on me, please!' : 'Oh yeah, master, more!'}
+                    title={'Press on me, please!'}
                     onClick={incrementCounterHandler}
-                    disabled={isIncrementBtnDisabled}
+                    disabled={incBtnDisabled}
                 />
                 <Button
                     title={'Reset'}
                     onClick={resetCounterHandler}
-                    disabled={isResetBtnDisabled}
+                    disabled={resetBtnDisabled}
                 />
             </div>
         </div>
