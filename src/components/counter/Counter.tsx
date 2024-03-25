@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button } from '../button/Button';
 import s from './Counter.module.css'
+import { CounterBoard } from './counterBoard/CounterBoard';
 
 type CounterPropsType = {
     count: number
@@ -13,9 +14,10 @@ type CounterPropsType = {
 export const Counter = ({count, startValue, maxValue, incrementCounter, resetCounter}: CounterPropsType) => {
 
     const incrementCounterHandler = () => {
-        if (count < maxValue)
-        incrementCounter()
-    }
+        if (startValue !== null && maxValue !== null && count < maxValue) {
+            incrementCounter()
+        }
+    } 
 
     const resetCounterHandler = () => {
         if (startValue >= 0) {
@@ -23,17 +25,16 @@ export const Counter = ({count, startValue, maxValue, incrementCounter, resetCou
         }
     }
 
-    const incBtnDisabled = count === maxValue;
-    const resetBtnDisabled = count === startValue;
+    const incBtnDisabled = count === maxValue
+    const resetBtnDisabled = count === startValue
     
     return (
         <div className={s.counter}>
-            <div className={s.scoreboard}>
-                <div className={count === maxValue ? s.countWarning : ''}>
-                    {count}
-                </div>
-            </div>
-            
+            <CounterBoard
+                count={count}
+                maxValue={maxValue}
+                startValue={startValue}
+            />
             <div className={s.buttonSection}>
                 <Button
                     bgColor='#3ae0a9'
