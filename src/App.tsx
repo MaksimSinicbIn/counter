@@ -35,20 +35,15 @@ function App() {
         setMaxValue(maxValue)
     }
 
-    const setLimitValues = () => {
-        setCount(startValue)
-        setMaxValue(maxValue)
-    }
-
     return (
         <div className='App'>
-            <Settings 
-                maxValue={maxValue}
+            <Settings
                 startValue={startValue}
-                setLimitValues={setLimitValues}
+                maxValue={maxValue}
+                setCount={setCount}
                 addStartValue={addStartValue}
-                addMaxValue={addMaxValue}
-                />
+                addMaxValue={addMaxValue} 
+            />
             <Counter
                 count={count}
                 startValue={startValue}
