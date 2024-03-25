@@ -26,3 +26,7 @@
     padding: 10px;
     box-shadow: 0px 1px 5px rgb(31, 31, 31);
 }
+
+.inputError {
+    background-color: rgb(247, 58, 58);
+}
