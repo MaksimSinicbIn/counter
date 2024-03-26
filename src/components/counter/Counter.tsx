@@ -7,22 +7,21 @@ type CounterPropsType = {
     count: number
     startValue: number
     maxValue: number
-    incrementCounter: () => void
-    resetCounter: (startValue: number) => void
+    errorStatus: boolean
+    error: string
+    setCount: (count: number) => void
 }
 
-export const Counter = ({count, startValue, maxValue, incrementCounter, resetCounter}: CounterPropsType) => {
+export const Counter = ({count, startValue, maxValue, errorStatus, error, setCount}: CounterPropsType) => {
 
     const incrementCounterHandler = () => {
-        if (startValue !== null && maxValue !== null && count < maxValue) {
-            incrementCounter()
+        if (count < maxValue) {
+            setCount(count + 1)
         }
     } 
 
     const resetCounterHandler = () => {
-        if (startValue >= 0) {
-            resetCounter(startValue)
-        }
+            setCount(startValue)
     }
 
     const incBtnDisabled = count === maxValue
@@ -31,6 +30,8 @@ export const Counter = ({count, startValue, maxValue, incrementCounter, resetCou
     return (
         <div className={s.counter}>
             <CounterBoard
+                errorStatus={errorStatus}
+                error={error}
                 count={count}
                 maxValue={maxValue}
                 startValue={startValue}

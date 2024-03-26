@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
 import s from './Settings.module.css'
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { LimitBoard } from './limitBoard/LimitBoard';
 
 type SettingsPropsType = {
     startValue: number
     maxValue: number
-    addStartValue: (startValue: number) => void
     addMaxValue: (maxValue: number) => void
+    addStartValue: (startValue: number) => void
     setCount: (value: number) => void
+    setError: (error: string) => void
+    setErrorStatus: (status: boolean) => void
+    errorStatus: boolean
 };
 
-export const Settings = ({startValue, maxValue, addStartValue, addMaxValue, setCount}: SettingsPropsType) => {
+export const Settings = ({
+    startValue,
+    maxValue,
+    errorStatus,
+    addMaxValue,
+    addStartValue,
+    setCount,
+    setErrorStatus,
+    setError}: SettingsPropsType) => {
+
     const [newStartValue, setNewStartValue] = useState(startValue);
     const [newMaxValue, setNewMaxValue] = useState(maxValue);
-    const [inputError, setInputError] = useState<string | null>(null)
-    const [inputErrorStatus, setInputErrorStatus] = useState(false)
 
     const onMaxValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewMaxValue(Number(e.currentTarget.value))
@@ -26,51 +36,39 @@ export const Settings = ({startValue, maxValue, addStartValue, addMaxValue, setC
         setNewStartValue(Number(e.currentTarget.value))
     }
 
-    const validate = () => {
-        if (newStartValue === null || newMaxValue === null) {
-            setInputError('Both start and max values must be set');
-            setInputErrorStatus(true);
-            return false
-        }
-        if (newStartValue < 0) {
-            setInputError('Start value must be non-negative');
-            setInputErrorStatus(true);
-            return false
-        }
-        if (newMaxValue <= newStartValue) {
-            setInputError('Max value must be greater than start value');
-            setInputErrorStatus(true);
-            return false
-        }
-        setInputError(null);
-        setInputErrorStatus(false);
-        return true
-    };
+    const newMinValueError = newStartValue < 0 || newStartValue >= newMaxValue
+    const newMaxValueError = newMaxValue < 0 || newMaxValue <= newStartValue
 
-    // const startCounter = () => {
-    //     if (newStartValue === null || newMaxValue === null) {
-    //         setInputError('Both start and max values must be set');
-    //         setInputErrorStatus(true);
-    //     }
-    //     if (newStartValue < 0 || newMaxValue < 0) {
-    //         setInputError('Start value must be non-negative');
-    //         setInputErrorStatus(true);
-    //     }
-    //     if (newMaxValue <= newStartValue) {
-    //         setInputError('Max value must be greater than start value');
-    //         setInputErrorStatus(true);
+    useEffect(() => {
+        if (newMinValueError || newMaxValueError) {
+            setError('Incorrect value!');
+            setErrorStatus(true);
+        }
+        // } else if (newStartValue !== startValue || newMaxValue !== maxValue) {
+        //     setError('Enter values and press \'Set\'');
+        //     setErrorStatus(!errorStatus);
+        // }
+        else {
+            setError('');
+            setErrorStatus(false);
+        }
+    }, [newStartValue, newMaxValue, newMinValueError, newMaxValueError, setError, setErrorStatus, startValue, maxValue]);
+
+    // const validate = () => {
+    //     if (newMinValueError || newMaxValueError) {
+    //         setError('Incorrect value!');
+    //         setErrorStatus(true);
+    //         return false
     //     } else {
-    //         setInputError(null);
-    //         setInputErrorStatus(false);
-    //         addStartValue(newStartValue);
-    //         addMaxValue(newMaxValue);
-    //         setCount(newStartValue);
+    //         setError('Enter values and press \'Set\'');
+    //         setErrorStatus(false);
+    //         return true
     //     }
-    // }
+    // };
 
     const startCounter = () => {
-        if (validate()) {
-            addStartValue(newStartValue);
+        if (!errorStatus) {
+            addStartValue(newStartValue)
             addMaxValue(newMaxValue);
             setCount(newStartValue);
         }
@@ -90,12 +88,12 @@ export const Settings = ({startValue, maxValue, addStartValue, addMaxValue, setC
         <div className={s.settings}>
             <div className={s.settingsBoard}>
                 <LimitBoard
-                    className={inputErrorStatus ? s.inputError : ''}
+                    className={errorStatus ? s.inputError : ''}
                     title={'Max Value:'}
                     value={newMaxValue}
                     onChange={onMaxValueChangeHandler}/>
                 <LimitBoard
-                    className={inputErrorStatus ? s.inputError : ''}
+                    className={errorStatus ? s.inputError : ''}
                     title={'Start Value:'}
                     value={newStartValue}
                     onChange={onStartValueChangeHandler}/>

@@ -7,6 +7,8 @@ function App() {
     const [maxValue, setMaxValue] = useState<number>(0)
     const [startValue, setStartValue] = useState<number>(0)
     const [count, setCount] = useState<number>(startValue)
+    const [errorStatus, setErrorStatus] = useState(false)
+    const [error, setError] = useState<string>('')
 
     useEffect( () => {
         let valueAsString = localStorage.getItem('countValue')
@@ -20,36 +22,32 @@ function App() {
         localStorage.setItem('countValue', JSON.stringify(count))
     }, [count] )
 
-    const incrementCounter = () => {
-        setCount(count + 1)
-    }
-
-    const resetCounter = (startValue: number) => {
-        setCount(startValue)
-    }
-
-    const addStartValue = (startValue: number) => {
-        setStartValue(startValue)
-    }
     const addMaxValue = (maxValue: number) => {
         setMaxValue(maxValue)
+    }
+    const addStartValue = (startValue: number) => {
+        setStartValue(startValue)
     }
 
     return (
         <div className='App'>
             <Settings
+                errorStatus={errorStatus}
+                setErrorStatus={setErrorStatus}
+                setError={setError}
                 startValue={startValue}
                 maxValue={maxValue}
                 setCount={setCount}
+                addMaxValue={addMaxValue}
                 addStartValue={addStartValue}
-                addMaxValue={addMaxValue} 
             />
             <Counter
+                error={error}
+                errorStatus={errorStatus}
                 count={count}
                 startValue={startValue}
                 maxValue={maxValue}
-                incrementCounter={incrementCounter}
-                resetCounter={resetCounter}
+                setCount={setCount}
             />
         </div>
     );
