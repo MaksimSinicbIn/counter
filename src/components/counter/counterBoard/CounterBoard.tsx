@@ -15,7 +15,7 @@ export const CounterBoard = ({count, error, errorStatus, maxValue, startValue}: 
     return (
         <div className={s.scoreboard}>
             <div className={count === maxValue ? s.countWarning : ''}>
-                { errorStatus ? error : count}
+                { errorStatus ? <span className={error.includes('Confirm') ? s.defaultMessage : s.errorMessage}>{error}</span> : count}
             </div>
         </div>
     );
