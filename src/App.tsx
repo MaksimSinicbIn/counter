@@ -4,7 +4,7 @@ import { Counter } from './components/counter/Counter';
 import { Settings } from './components/settings/Settings';
 
 function App() {
-    const [maxValue, setMaxValue] = useState<number>(0)
+    const [maxValue, setMaxValue] = useState<number>(5)
     const [startValue, setStartValue] = useState<number>(0)
     const [count, setCount] = useState<number>(startValue)
     const [errorStatus, setErrorStatus] = useState(false)
@@ -32,7 +32,6 @@ function App() {
     return (
         <div className='App'>
             <Settings
-                errorStatus={errorStatus}
                 setErrorStatus={setErrorStatus}
                 setError={setError}
                 startValue={startValue}
