@@ -1,10 +1,19 @@
 .form {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     gap: 20px;
+    width: 100%;
 }
 
 .input {
     height: 25px;
+    width: 175px;
     border-radius: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.inputError {
+    background-color: rgb(247, 58, 58);
 }
