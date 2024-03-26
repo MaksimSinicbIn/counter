@@ -12,13 +12,11 @@ type SettingsPropsType = {
     setCount: (value: number) => void
     setError: (error: string) => void
     setErrorStatus: (status: boolean) => void
-    errorStatus: boolean
 };
 
 export const Settings = ({
     startValue,
     maxValue,
-    errorStatus,
     addMaxValue,
     addStartValue,
     setCount,
@@ -36,70 +34,52 @@ export const Settings = ({
         setNewStartValue(Number(e.currentTarget.value))
     }
 
-    const newMinValueError = newStartValue < 0 || newStartValue >= newMaxValue
+    const newStartValueError = newStartValue < 0 || newStartValue >= newMaxValue
     const newMaxValueError = newMaxValue < 0 || newMaxValue <= newStartValue
+    const isError = newStartValueError || newMaxValueError
 
     useEffect(() => {
-        if (newMinValueError || newMaxValueError) {
+        if (isError) {
             setError('Incorrect value!');
             setErrorStatus(true);
+        } else if ( newStartValue !== startValue || newMaxValue !== maxValue){
+            setError('Press \'Confirm\' to continue');
+            setErrorStatus(true);
         }
-        // } else if (newStartValue !== startValue || newMaxValue !== maxValue) {
-        //     setError('Enter values and press \'Set\'');
-        //     setErrorStatus(!errorStatus);
-        // }
-        else {
-            setError('');
-            setErrorStatus(false);
-        }
-    }, [newStartValue, newMaxValue, newMinValueError, newMaxValueError, setError, setErrorStatus, startValue, maxValue]);
-
-    // const validate = () => {
-    //     if (newMinValueError || newMaxValueError) {
-    //         setError('Incorrect value!');
-    //         setErrorStatus(true);
-    //         return false
-    //     } else {
-    //         setError('Enter values and press \'Set\'');
-    //         setErrorStatus(false);
-    //         return true
-    //     }
-    // };
+    }, [newStartValue, newMaxValue, newStartValueError, newMaxValueError, setError, setErrorStatus, startValue, maxValue, isError]);
 
     const startCounter = () => {
-        if (!errorStatus) {
+        if (!isError) {
             addStartValue(newStartValue)
             addMaxValue(newMaxValue);
             setCount(newStartValue);
+            setErrorStatus(false);
         }
     };
-
-
-
-    // const setNewValues = () => {
-    //     addStartValue(newStartValue);
-    //     addMaxValue(newMaxValue);
-    //     if (newStartValue !== null && newMaxValue !== null) {
-    //         setCount(newStartValue);
-    //     }
-    // }
 
     return (
         <div className={s.settings}>
             <div className={s.settingsBoard}>
                 <LimitBoard
-                    className={errorStatus ? s.inputError : ''}
                     title={'Max Value:'}
                     value={newMaxValue}
-                    onChange={onMaxValueChangeHandler}/>
+                    onChange={onMaxValueChangeHandler}
+                    inputError={newMaxValueError}
+                />
                 <LimitBoard
-                    className={errorStatus ? s.inputError : ''}
                     title={'Start Value:'}
                     value={newStartValue}
-                    onChange={onStartValueChangeHandler}/>
+                    onChange={onStartValueChangeHandler}
+                    inputError={newStartValueError}
+                />
             </div>
             <div className={s.buttonSection}>
-                <Button bgColor='#3ae0a9' title={'Set'} onClick={startCounter}/>
+                <Button
+                    bgColor='#3ae0a9'
+                    title={'Confirm'}
+                    onClick={startCounter}
+                    disabled={isError}
+                />
             </div>
         </div>
     );
