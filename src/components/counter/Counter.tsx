@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 import { Button } from '../button/Button';
 import s from './Counter.module.css'
 import { CounterBoard } from './counterBoard/CounterBoard';
@@ -7,12 +7,11 @@ type CounterPropsType = {
     count: number
     startValue: number
     maxValue: number
-    errorStatus: boolean
     error: string
     setCount: (count: number) => void
 }
 
-export const Counter = ({count, startValue, maxValue, errorStatus, error, setCount}: CounterPropsType) => {
+export const Counter = ({count, startValue, maxValue, error, setCount}: CounterPropsType) => {
 
     const incrementCounterHandler = () => {
         if (count < maxValue) {
@@ -24,22 +23,20 @@ export const Counter = ({count, startValue, maxValue, errorStatus, error, setCou
             setCount(startValue)
     }
 
-    const incBtnDisabled = count === maxValue
-    const resetBtnDisabled = count === startValue
+    const incBtnDisabled = count === maxValue || !!error
+    const resetBtnDisabled = count === startValue || !!error
     
     return (
         <div className={s.counter}>
             <CounterBoard
-                errorStatus={errorStatus}
                 error={error}
                 count={count}
                 maxValue={maxValue}
-                startValue={startValue}
             />
             <div className={s.buttonSection}>
                 <Button
                     bgColor='#3ae0a9'
-                    title={'Press on me, please!'}
+                    title={'Increment'}
                     onClick={incrementCounterHandler}
                     disabled={incBtnDisabled}
                 />
