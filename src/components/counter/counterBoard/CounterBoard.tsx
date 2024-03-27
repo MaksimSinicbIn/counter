@@ -1,21 +1,21 @@
 import * as React from 'react';
 import s from './CounterBoard.module.css'
-import { useEffect, useState } from 'react';
+import { counterMessages } from '../../../App';
 
 type CounterBoardPropsType = {
     count: number
     maxValue: number
-    startValue: number
     error: string
-    errorStatus: boolean
 };
 
-export const CounterBoard = ({count, error, errorStatus, maxValue, startValue}: CounterBoardPropsType) => {
+export const CounterBoard = ({count, error, maxValue}: CounterBoardPropsType) => {
 
+    const finalClassName = error.includes(counterMessages.confirm) ? s.defaultMessage : s.errorMessage
+    
     return (
         <div className={s.scoreboard}>
             <div className={count === maxValue ? s.countWarning : ''}>
-                { errorStatus ? <span className={error.includes('Confirm') ? s.defaultMessage : s.errorMessage}>{error}</span> : count}
+                { !!error ? <span className={finalClassName}>{error}</span> : count}
             </div>
         </div>
     );
