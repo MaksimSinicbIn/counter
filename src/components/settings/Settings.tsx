@@ -3,6 +3,7 @@ import { Button } from '../button/Button';
 import s from './Settings.module.css'
 import { ChangeEvent, useEffect, useState } from 'react';
 import { LimitBoard } from './limitBoard/LimitBoard';
+import { counterMessages } from '../../App';
 
 type SettingsPropsType = {
     startValue: number
@@ -11,7 +12,6 @@ type SettingsPropsType = {
     addStartValue: (startValue: number) => void
     setCount: (value: number) => void
     setError: (error: string) => void
-    setErrorStatus: (status: boolean) => void
 };
 
 export const Settings = ({
@@ -20,7 +20,6 @@ export const Settings = ({
     addMaxValue,
     addStartValue,
     setCount,
-    setErrorStatus,
     setError}: SettingsPropsType) => {
 
     const [newStartValue, setNewStartValue] = useState(startValue);
@@ -37,23 +36,22 @@ export const Settings = ({
     const newStartValueError = newStartValue < 0 || newStartValue >= newMaxValue
     const newMaxValueError = newMaxValue < 0 || newMaxValue <= newStartValue
     const isError = newStartValueError || newMaxValueError
-
+    
     useEffect(() => {
         if (isError) {
-            setError('Incorrect value!');
-            setErrorStatus(true);
+            setError(counterMessages.error); 
         } else if ( newStartValue !== startValue || newMaxValue !== maxValue){
-            setError('Press \'Confirm\' to continue');
-            setErrorStatus(true);
+            setError(counterMessages.confirm);
+        } else {
+            setError('');
         }
-    }, [newStartValue, newMaxValue, newStartValueError, newMaxValueError, setError, setErrorStatus, startValue, maxValue, isError]);
+    }, [newStartValue, newMaxValue, newStartValueError, newMaxValueError, setError, startValue, maxValue, isError]);
 
     const startCounter = () => {
         if (!isError) {
             addStartValue(newStartValue)
             addMaxValue(newMaxValue);
             setCount(newStartValue);
-            setErrorStatus(false);
         }
     };
 
