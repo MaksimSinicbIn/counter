@@ -3,36 +3,50 @@ import './App.css';
 import { Counter } from './components/counter/Counter';
 import { Settings } from './components/settings/Settings';
 
+export const counterMessages = {
+    confirm: 'Press \'Confirm\' to continue',
+    error: 'Incorrect value!'
+} as const
+
 function App() {
-    const [maxValue, setMaxValue] = useState<number>(5)
-    const [startValue, setStartValue] = useState<number>(0)
+
+    const loadedMaxValue = localStorage.getItem("maxValue")
+    ? JSON.parse(localStorage.getItem("maxValue") as string)
+    : []; 
+
+    const loadedStartValue = localStorage.getItem("startValue")
+    ? JSON.parse(localStorage.getItem("startValue") as string) 
+    : [];
+
+    const [maxValue, setMaxValue] = useState<number>(loadedMaxValue)
+    const [startValue, setStartValue] = useState<number>(loadedStartValue)
     const [count, setCount] = useState<number>(startValue)
-    const [errorStatus, setErrorStatus] = useState(false)
     const [error, setError] = useState<string>('')
 
     useEffect( () => {
-        let valueAsString = localStorage.getItem('countValue')
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            setCount(newValue)
-        }
-    }, [] )
+        let currentCount = localStorage.getItem('countValue')
+            if (currentCount) {
+                setCount(JSON.parse(currentCount))
+            }
+    }, [] );
 
     useEffect( () => {
         localStorage.setItem('countValue', JSON.stringify(count))
-    }, [count] )
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+        localStorage.setItem('startValue', JSON.stringify(startValue))
+    }, [count, maxValue, startValue] );
 
     const addMaxValue = (maxValue: number) => {
         setMaxValue(maxValue)
-    }
+    };
+
     const addStartValue = (startValue: number) => {
         setStartValue(startValue)
-    }
+    };
 
     return (
         <div className='App'>
             <Settings
-                setErrorStatus={setErrorStatus}
                 setError={setError}
                 startValue={startValue}
                 maxValue={maxValue}
@@ -42,7 +56,6 @@ function App() {
             />
             <Counter
                 error={error}
-                errorStatus={errorStatus}
                 count={count}
                 startValue={startValue}
                 maxValue={maxValue}
@@ -50,6 +63,6 @@ function App() {
             />
         </div>
     );
-}
+};
 
 export default App;
