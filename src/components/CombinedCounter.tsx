@@ -1,5 +1,5 @@
 import * as React from 'react';
-import s from './FullCounter.module.css'
+import s from './CombinedCounter.module.css'
 import { Settings } from './settings/Settings';
 import { Counter } from './counter/Counter';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ export const counterMessages = {
     error: 'Incorrect value!'
 } as const
 
-export const FullCounter = () => {
+export const CombinedCounter = () => {
 
     const [error, setError] = useState<string>('')
 
