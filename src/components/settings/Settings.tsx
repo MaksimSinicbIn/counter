@@ -3,15 +3,13 @@ import { Button } from '../button/Button';
 import s from './Settings.module.css'
 import { ChangeEvent, useEffect, useState } from 'react';
 import { LimitBoard } from './limitBoard/LimitBoard';
-import { counterMessages } from '../../App';
 import { useDispatch } from 'react-redux';
 import { setSettingsAC } from '../redux/counterReducer';
+import { counterMessages } from '../CombinedCounter';
 
 type SettingsPropsType = {
     startValue: number
     maxValue: number
-    // addMaxValue: (maxValue: number) => void
-    // addStartValue: (startValue: number) => void
     setError: (error: string) => void
 };
 

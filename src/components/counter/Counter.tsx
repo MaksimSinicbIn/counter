@@ -23,12 +23,12 @@ export const Counter = ({currentValue, startValue, maxValue, error}: CounterProp
     }, [currentValue, maxValue] )
 
     const resetCounter = () => {
-            dispatch(resetCounterAC())
+        dispatch(resetCounterAC())
     }
 
     const incBtnDisabled = currentValue === maxValue || !!error
     const resetBtnDisabled = currentValue === startValue || !!error
-    
+
     return (
         <div className={s.counter}>
             <CounterBoard
