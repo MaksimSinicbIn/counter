@@ -3,19 +3,19 @@ import s from './CounterBoard.module.css'
 import { counterMessages } from '../../../App';
 
 type CounterBoardPropsType = {
-    count: number
+    currentValue: number
     maxValue: number
     error: string
 };
 
-export const CounterBoard = ({count, error, maxValue}: CounterBoardPropsType) => {
+export const CounterBoard = ({currentValue, error, maxValue}: CounterBoardPropsType) => {
 
     const finalClassName = error.includes(counterMessages.confirm) ? s.defaultMessage : s.errorMessage
     
     return (
         <div className={s.scoreboard}>
-            <div className={count === maxValue ? s.countWarning : ''}>
-                { !!error ? <span className={finalClassName}>{error}</span> : count}
+            <div className={currentValue === maxValue ? s.countWarning : ''}>
+                { !!error ? <span className={finalClassName}>{error}</span> : currentValue}
             </div>
         </div>
     );

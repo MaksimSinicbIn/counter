@@ -22,7 +22,7 @@ function App() {
         return loadedStartValue ? JSON.parse(loadedStartValue) : DEFAULT_START_VALUE;
     })
     const [count, setCount] = useState<number>(() => {
-        const start = localStorage.getItem("startValue")
+        // const start = localStorage.getItem("startValue")
         // if (start) {
         //     return JSON.parse(start)
         // } 
@@ -55,16 +55,16 @@ function App() {
                 setError={setError}
                 startValue={startValue}
                 maxValue={maxValue}
-                setCount={setCount}
-                addMaxValue={addMaxValue}
-                addStartValue={addStartValue}
+                // setCount={setCount}
+                // addMaxValue={addMaxValue}
+                // addStartValue={addStartValue}
             />
             <Counter
                 error={error}
-                count={count}
+                currentValue={count}
                 startValue={startValue}
                 maxValue={maxValue}
-                setCount={setCount}
+                // setCount={setCount}
             />
         </div>
     );

@@ -4,26 +4,26 @@ import s from './Settings.module.css'
 import { ChangeEvent, useEffect, useState } from 'react';
 import { LimitBoard } from './limitBoard/LimitBoard';
 import { counterMessages } from '../../App';
+import { useDispatch } from 'react-redux';
+import { setSettingsAC } from '../redux/counterReducer';
 
 type SettingsPropsType = {
     startValue: number
     maxValue: number
-    addMaxValue: (maxValue: number) => void
-    addStartValue: (startValue: number) => void
-    setCount: (value: number) => void
+    // addMaxValue: (maxValue: number) => void
+    // addStartValue: (startValue: number) => void
     setError: (error: string) => void
 };
 
 export const Settings = ({
     startValue,
     maxValue,
-    addMaxValue,
-    addStartValue,
-    setCount,
     setError}: SettingsPropsType) => {
 
     const [newStartValue, setNewStartValue] = useState(startValue);
     const [newMaxValue, setNewMaxValue] = useState(maxValue);
+
+    const dispatch = useDispatch()
 
     const onMaxValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewMaxValue(Number(e.currentTarget.value))
@@ -45,13 +45,11 @@ export const Settings = ({
         } else {
             setError('');
         }
-    }, [newStartValue, newMaxValue, newStartValueError, newMaxValueError, setError, startValue, maxValue, isError]);
+    }, [newStartValue, newMaxValue, newStartValueError, newMaxValueError, startValue, maxValue, isError]);
 
     const startCounter = () => {
         if (!isError) {
-            addStartValue(newStartValue)
-            addMaxValue(newMaxValue);
-            setCount(newStartValue);
+            dispatch(setSettingsAC(newMaxValue, newStartValue))
         }
     };
 
