@@ -1,19 +1,14 @@
-.form {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 20px;
+.settingsBoard {
     width: 100%;
-}
-
-.input {
-    height: 25px;
-    width: 175px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 5px solid rgb(167, 243, 43);
     border-radius: 5px;
-    text-align: center;
-    font-weight: 700;
-}
-
-.inputError {
-    background-color: rgb(247, 58, 58);
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    box-shadow: 0px 1px 5px rgb(31, 31, 31);
 }

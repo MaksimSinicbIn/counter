@@ -1,24 +1,42 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
 import s from './LimitBoard.module.css'
+import { Input } from '../../input/Input';
 
 type LimitBoardPropsType = {
-    title: string
-    value: number
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
-    inputError: boolean
+    MaxValueTitle: string
+    StartValueTitle: string
+    newMaxValue: number
+    newStartValue: number
+    newMaxValueInputError: boolean
+    newStartValueInputError: boolean
+    onMaxValueChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onStartValueChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const LimitBoard = ({title, value, inputError, onChange}: LimitBoardPropsType) => {
+export const LimitBoard = ({
+    MaxValueTitle,
+    StartValueTitle,
+    newMaxValue,
+    newStartValue,
+    newMaxValueInputError,
+    newStartValueInputError,
+    onMaxValueChange,
+    onStartValueChange }: LimitBoardPropsType) => {
     return (
-        <form className={s.form}>
-            <label>{title}</label>
-            <input 
-                className={inputError ? `${s.inputError} ${s.input}` : s.input}
-                value={value}
-                type='number'
-                onChange={onChange}
+        <div className={s.settingsBoard}>
+            <Input
+                title={MaxValueTitle}
+                value={newMaxValue}
+                onChange={onMaxValueChange}
+                inputError={newMaxValueInputError}
             />
-        </form>
+            <Input
+                title={StartValueTitle}
+                value={newStartValue}
+                onChange={onStartValueChange}
+                inputError={newStartValueInputError}
+            />
+        </div>
     );
 };
