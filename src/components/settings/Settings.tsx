@@ -55,17 +55,21 @@ export const Settings = ({
         <div className={s.settings}>
             <div className={s.settingsBoard}>
                 <LimitBoard
-                    title={'Max Value:'}
-                    value={newMaxValue}
-                    onChange={onMaxValueChangeHandler}
-                    inputError={newMaxValueError}
+                    MaxValueTitle={'Max Value: '}
+                    StartValueTitle={'Start Value: '}
+                    newMaxValue={newMaxValue}
+                    newStartValue={newStartValue}
+                    newMaxValueInputError={newMaxValueError}
+                    newStartValueInputError={newStartValueError}
+                    onMaxValueChange={onMaxValueChangeHandler}
+                    onStartValueChange={onStartValueChangeHandler}
                 />
-                <LimitBoard
+                {/* <LimitBoard
                     title={'Start Value:'}
                     value={newStartValue}
                     onChange={onStartValueChangeHandler}
                     inputError={newStartValueError}
-                />
+                /> */}
             </div>
             <div className={s.buttonSection}>
                 <Button
