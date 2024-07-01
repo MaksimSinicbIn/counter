@@ -5,16 +5,14 @@ import bodyaga from '../../../assets/audio/bodyaga.ogg'
 import chtoProishodit from '../../../assets/audio/chto_proishodit.ogg'
 import nedorazumenie from '../../../assets/audio/nedorazumenie.ogg'
 
-type CounterBoardPropsType = {
+type CounterBoardProps = {
     currentValue: number
     maxValue: number
     error: string
 };
 
+export const CounterBoard = ({ currentValue, error, maxValue }: CounterBoardProps) => {
 
-
-export const CounterBoard = ({currentValue, error, maxValue}: CounterBoardPropsType) => {
-    
     const audioWarnings = [bodyaga, chtoProishodit, nedorazumenie]
 
     function getRandomNumber(min: number, max: number) {
@@ -23,7 +21,7 @@ export const CounterBoard = ({currentValue, error, maxValue}: CounterBoardPropsT
 
     const randomAudioWarningsIndex = getRandomNumber(0, audioWarnings.length)
 
-    const randomWarning  = audioWarnings[randomAudioWarningsIndex]
+    const randomWarning = audioWarnings[randomAudioWarningsIndex]
 
     const finalClassName = error.includes(counterMessages.confirm) ? s.defaultMessage : s.errorMessage
 
@@ -34,13 +32,10 @@ export const CounterBoard = ({currentValue, error, maxValue}: CounterBoardPropsT
                     (
                         <>
                             <span className={finalClassName}>{error}</span>
-                            <audio autoPlay src={randomWarning}/>
+                            <audio autoPlay src={randomWarning} />
                         </>
                     ) : (currentValue)}
             </div>
-            <>
-
-            </>
         </div>
     );
 };

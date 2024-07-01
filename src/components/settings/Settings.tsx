@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setSettingsAC } from '../redux/counterReducer';
 import { counterMessages } from '../CombinedCounter';
 
-type SettingsPropsType = {
+type SettingsProps = {
     startValue: number
     maxValue: number
     setError: (error: string) => void
@@ -16,7 +16,7 @@ type SettingsPropsType = {
 export const Settings = ({
     startValue,
     maxValue,
-    setError}: SettingsPropsType) => {
+    setError }: SettingsProps) => {
 
     const [newStartValue, setNewStartValue] = useState(startValue);
     const [newMaxValue, setNewMaxValue] = useState(maxValue);
@@ -34,11 +34,11 @@ export const Settings = ({
     const newStartValueError = newStartValue < 0 || newStartValue >= newMaxValue
     const newMaxValueError = newMaxValue < 0 || newMaxValue <= newStartValue
     const isError = newStartValueError || newMaxValueError
-    
+
     useEffect(() => {
         if (isError) {
-            setError(counterMessages.error); 
-        } else if ( newStartValue !== startValue || newMaxValue !== maxValue){
+            setError(counterMessages.error);
+        } else if (newStartValue !== startValue || newMaxValue !== maxValue) {
             setError(counterMessages.confirm);
         } else {
             setError('');
@@ -64,12 +64,6 @@ export const Settings = ({
                     onMaxValueChange={onMaxValueChangeHandler}
                     onStartValueChange={onStartValueChangeHandler}
                 />
-                {/* <LimitBoard
-                    title={'Start Value:'}
-                    value={newStartValue}
-                    onChange={onStartValueChangeHandler}
-                    inputError={newStartValueError}
-                /> */}
             </div>
             <div className={s.buttonSection}>
                 <Button

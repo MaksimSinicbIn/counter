@@ -16,7 +16,7 @@ export const CombinedCounter = () => {
 
     const [error, setError] = useState<string>('')
 
-    const counter = useSelector<AppRootStateType, CounterType>( state => state.counter)
+    const counter = useSelector<AppRootStateType, CounterType>(state => state.counter)
 
     return (
         <div className={s.fullCounter}>
