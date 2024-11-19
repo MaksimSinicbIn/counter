@@ -28,14 +28,9 @@ export const CounterBoard = ({ currentValue, error, maxValue }: CounterBoardProp
     return (
         <div className={s.scoreboard}>
             <div className={currentValue === maxValue ? s.countWarning : ''}>
-                {!!error ?
-                    (
-                        <>
-                            <span className={finalClassName}>{error}</span>
-                            <audio autoPlay src={randomWarning} />
-                        </>
-                    ) : (currentValue)}
+                {!!error ? <span className={finalClassName}>{error}</span> : currentValue}
             </div>
+            {!!error.includes(counterMessages.error) ? <audio autoPlay src={randomWarning} /> : null}
         </div>
     );
 };
