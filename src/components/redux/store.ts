@@ -18,3 +18,6 @@ store.subscribe(throttle(() => {
 }, 1000))
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
+
+// @ts-ignore
+window.store = store;
