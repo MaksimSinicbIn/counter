@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { Button } from '../button/Button';
 import s from './Counter.module.css'
+import { Button } from '../button/Button';
 import { CounterBoard } from './counterBoard/CounterBoard';
 import { useDispatch } from 'react-redux';
 import { incrementCounterAC, resetCounterAC } from '../redux/counterReducer';

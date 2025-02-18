@@ -8,8 +8,8 @@ type ButtonPropsType = {
     onClick: () => void
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button = ({title, disabled, bgColor, onClick}: ButtonPropsType) => {
-    
+export const Button = ({ title, disabled, bgColor, onClick }: ButtonPropsType) => {
+
     const finalClassName = `
         ${s.button}
             ${bgColor === '#3ae0a9' ? s.incButton : s.resetButton}

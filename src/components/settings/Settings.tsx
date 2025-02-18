@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { Button } from '../button/Button';
 import s from './Settings.module.css'
+import { Button } from '../button/Button';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { LimitBoard } from './limitBoard/LimitBoard';
 import { useDispatch } from 'react-redux';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ChangeEvent } from 'react';
 import s from './LimitBoard.module.css'
 import { Input } from '../../input/Input';
