@@ -6,11 +6,6 @@ import { CounterType } from 'app/counterReducer';
 import { Settings } from 'components/settings/Settings';
 import { Counter } from 'components/counter/Counter';
 
-export const counterMessages = {
-    confirm: 'Press \'Confirm\' to continue',
-    error: 'Incorrect value!'
-} as const
-
 export const CombinedCounter = () => {
 
     const [error, setError] = useState<string>('')

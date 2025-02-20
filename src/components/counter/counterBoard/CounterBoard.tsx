@@ -1,17 +1,17 @@
 import * as React from 'react';
 import s from './CounterBoard.module.css';
-import { counterMessages } from 'components/CombinedCounter';
 import bodyaga from 'assets/audio/bodyaga.ogg'
 import chtoProishodit from 'assets/audio/chto_proishodit.ogg'
 import nedorazumenie from 'assets/audio/nedorazumenie.ogg'
+import { COUNTER_MESSAGES } from 'constants/messages';
 
-type CounterBoardProps = {
+type Props = {
     currentValue: number
     maxValue: number
     error: string
 };
 
-export const CounterBoard = ({ currentValue, error, maxValue }: CounterBoardProps) => {
+export const CounterBoard = ({ currentValue, error, maxValue }: Props) => {
 
     const audioWarnings = [bodyaga, chtoProishodit, nedorazumenie]
 
@@ -23,14 +23,14 @@ export const CounterBoard = ({ currentValue, error, maxValue }: CounterBoardProp
 
     const randomWarning = audioWarnings[randomAudioWarningsIndex]
 
-    const finalClassName = error.includes(counterMessages.confirm) ? s.defaultMessage : s.errorMessage
+    const finalClassName = error.includes(COUNTER_MESSAGES.CONFIRM) ? s.defaultMessage : s.errorMessage
 
     return (
         <div className={s.scoreboard}>
             <div className={currentValue === maxValue ? s.countWarning : ''}>
                 {!!error ? <span className={finalClassName}>{error}</span> : currentValue}
             </div>
-            {!!error.includes(counterMessages.error) ? <audio autoPlay src={randomWarning} /> : null}
+            {!!error.includes(COUNTER_MESSAGES.ERROR) ? <audio autoPlay src={randomWarning} /> : null}
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react"
 import s from './Input.module.css'
 
-type InputProps = {
+type Props = {
     title: string
     value: number
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -9,7 +9,7 @@ type InputProps = {
     className?: string
 }
 
-export const Input = ({ title, value, inputError, className, onChange }: InputProps) => {
+export const Input = ({ title, value, inputError, className, onChange }: Props) => {
     return (
         <form className={s.form}>
             <label>{title}</label>

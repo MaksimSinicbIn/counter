@@ -5,14 +5,14 @@ import { incrementCounterAC, resetCounterAC } from 'app/counterReducer';
 import { Button } from 'components/button/Button';
 import { CounterBoard } from 'components/counter/counterBoard/CounterBoard';
 
-type CounterPropsType = {
+type Props = {
     currentValue: number
     startValue: number
     maxValue: number
     error: string
 }
 
-export const Counter = ({currentValue, startValue, maxValue, error}: CounterPropsType) => {
+export const Counter = ({ currentValue, startValue, maxValue, error }: Props) => {
 
     const dispatch = useDispatch()
 
@@ -20,7 +20,7 @@ export const Counter = ({currentValue, startValue, maxValue, error}: CounterProp
         if (currentValue < maxValue) {
             dispatch(incrementCounterAC())
         }
-    }, [currentValue, maxValue] )
+    }, [currentValue, maxValue])
 
     const resetCounter = () => {
         dispatch(resetCounterAC())

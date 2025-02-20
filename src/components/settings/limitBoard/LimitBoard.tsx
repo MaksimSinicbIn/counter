@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import s from './LimitBoard.module.css'
 import { Input } from 'components/input/Input';
 
-type LimitBoardProps = {
+type Props = {
     MaxValueTitle: string
     StartValueTitle: string
     newMaxValue: number
@@ -21,7 +21,7 @@ export const LimitBoard = ({
     newMaxValueInputError,
     newStartValueInputError,
     onMaxValueChange,
-    onStartValueChange }: LimitBoardProps) => {
+    onStartValueChange }: Props) => {
     return (
         <div className={s.settingsBoard}>
             <Input

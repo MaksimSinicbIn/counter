@@ -3,10 +3,10 @@ import s from './Settings.module.css'
 import { useDispatch } from 'react-redux';
 import { setSettingsAC } from 'app/counterReducer';
 import { Button } from 'components/button/Button';
-import { counterMessages } from 'components/CombinedCounter';
 import { LimitBoard } from 'components/settings/limitBoard/LimitBoard';
+import { COUNTER_MESSAGES } from 'constants/messages';
 
-type SettingsProps = {
+type Props = {
     startValue: number
     maxValue: number
     setError: (error: string) => void
@@ -15,7 +15,7 @@ type SettingsProps = {
 export const Settings = ({
     startValue,
     maxValue,
-    setError }: SettingsProps) => {
+    setError }: Props) => {
 
     const [newStartValue, setNewStartValue] = useState(startValue);
     const [newMaxValue, setNewMaxValue] = useState(maxValue);
@@ -36,9 +36,9 @@ export const Settings = ({
 
     useEffect(() => {
         if (isError) {
-            setError(counterMessages.error);
+            setError(COUNTER_MESSAGES.ERROR);
         } else if (newStartValue !== startValue || newMaxValue !== maxValue) {
-            setError(counterMessages.confirm);
+            setError(COUNTER_MESSAGES.CONFIRM);
         } else {
             setError('');
         }
