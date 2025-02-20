@@ -1,9 +1,9 @@
 import * as React from 'react';
 import s from './CounterBoard.module.css';
-import { counterMessages } from '../../CombinedCounter';
-import bodyaga from '../../../assets/audio/bodyaga.ogg'
-import chtoProishodit from '../../../assets/audio/chto_proishodit.ogg'
-import nedorazumenie from '../../../assets/audio/nedorazumenie.ogg'
+import { counterMessages } from 'components/CombinedCounter';
+import bodyaga from 'assets/audio/bodyaga.ogg'
+import chtoProishodit from 'assets/audio/chto_proishodit.ogg'
+import nedorazumenie from 'assets/audio/nedorazumenie.ogg'
 
 type CounterBoardProps = {
     currentValue: number

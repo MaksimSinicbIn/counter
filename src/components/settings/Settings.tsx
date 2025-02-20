@@ -1,10 +1,10 @@
-import s from './Settings.module.css'
-import { Button } from '../button/Button';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { LimitBoard } from './limitBoard/LimitBoard';
+import s from './Settings.module.css'
 import { useDispatch } from 'react-redux';
-import { setSettingsAC } from '../redux/counterReducer';
-import { counterMessages } from '../CombinedCounter';
+import { setSettingsAC } from 'app/counterReducer';
+import { Button } from 'components/button/Button';
+import { counterMessages } from 'components/CombinedCounter';
+import { LimitBoard } from 'components/settings/limitBoard/LimitBoard';
 
 type SettingsProps = {
     startValue: number

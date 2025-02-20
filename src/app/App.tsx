@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { CombinedCounter } from './components/CombinedCounter';
+import { CombinedCounter } from 'components/CombinedCounter';
 
 
 function App() {

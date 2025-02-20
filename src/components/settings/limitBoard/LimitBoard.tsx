@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import s from './LimitBoard.module.css'
-import { Input } from '../../input/Input';
+import { Input } from 'components/input/Input';
 
 type LimitBoardProps = {
     MaxValueTitle: string

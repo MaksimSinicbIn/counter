@@ -1,11 +1,10 @@
-import * as React from 'react';
 import s from './CombinedCounter.module.css'
-import { Settings } from './settings/Settings';
-import { Counter } from './counter/Counter';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppRootStateType } from './redux/store';
-import { CounterType } from './redux/counterReducer';
+import { AppRootStateType } from 'app/store';
+import { CounterType } from 'app/counterReducer';
+import { Settings } from 'components/settings/Settings';
+import { Counter } from 'components/counter/Counter';
 
 export const counterMessages = {
     confirm: 'Press \'Confirm\' to continue',

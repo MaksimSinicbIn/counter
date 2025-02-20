@@ -1,6 +1,6 @@
 import { combineReducers, legacy_createStore as createStore } from "redux";
-import { counterReducer } from "./counterReducer";
-import { loadState, saveState } from "../../localStorage";
+import { counterReducer } from "app/counterReducer";
+import { loadState, saveState } from "localStorage";
 import { throttle } from "lodash";
 
 const rootReducer = combineReducers({
